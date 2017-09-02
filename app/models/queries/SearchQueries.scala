@@ -6,7 +6,7 @@ import models.result.filter.Filter
 import models.result.orderBy.OrderBy
 
 trait SearchQueries[T <: Product] { this: BaseQueries[T] =>
-  private[this] def searchClause(q: String) = searchColumns.map(c => s"lower(convert(${quote(c)}, char) like ?").mkString(" or ")
+  private[this] def searchClause(q: String) = searchColumns.map(c => s"lower(convert(${quote(c)}, char)) like ?").mkString(" or ")
   private[this] def whereClause(filters: Seq[Filter], add: Option[String] = None) = (filterClause(filters, fields), add) match {
     case (Some(fc), Some(a)) => " where (" + fc + ") and (" + a + ")"
     case (Some(fc), None) => " where " + fc
