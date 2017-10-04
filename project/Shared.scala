@@ -20,7 +20,7 @@ object Shared {
   }
 
   val compileOptions = Seq(
-    "target:jvm-1.8", "-encoding", "UTF-8", "-feature", "-deprecation", "-explaintypes", "-feature", "-unchecked",
+    "-target:jvm-1.8", "-encoding", "UTF-8", "-feature", "-deprecation", "-explaintypes", "-feature", "-unchecked",
     "–Xcheck-null", "-Xfatal-warnings", /* "-Xlint", */ "-Xcheckinit", "-Xfuture",
     "-Yno-adapted-args", "-Ywarn-dead-code", "-Ywarn-inaccessible", "-Ywarn-nullary-override", "-Ywarn-numeric-widen", "-Ywarn-infer-any"
   )
@@ -34,6 +34,7 @@ object Shared {
       "-Ywarn-unused:imports",
       "-Xfatal-warnings"
     ))),
+    scalacOptions in (Compile, doc) := Seq("-encoding", "UTF-8"),
     scalacOptions in Test ++= Seq("-Yrangepos"),
 
     publishMavenStyle := false,
@@ -46,9 +47,7 @@ object Shared {
     scapegoatDisabledInspections := Seq("FinalModifierOnCaseClass")
   ) ++ graphSettings ++ scalariformSettings
 
-  def withProjects(p: Project, includes: Seq[Project]) = includes.foldLeft(p) { (proj, inc) =>
-    proj.aggregate(inc).dependsOn(inc)
-  }
+  def withProjects(p: Project, includes: Seq[Project]) = includes.foldLeft(p)((proj, inc) => proj.dependsOn(inc))
 
   lazy val shared = (crossProject(JSPlatform, JVMPlatform).crossType(CrossType.Pure) in file("shared")).settings(commonSettings: _*).settings(
     libraryDependencies ++= Seq(

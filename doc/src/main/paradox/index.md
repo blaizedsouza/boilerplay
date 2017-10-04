@@ -1,12 +1,19 @@
 # Boilerplay
 
+@@@ index
+
+* [Getting Started](gettingStarted.md)
+* [Explore](explore/index.md)
+* [Extend](extend/index.md)
+* [Monitor](monitor/index.md)
+* [Build](build/index.md)
+* [Technology](technology.md)
+* [Troubleshooting](troubleshooting.md)
+
+@@@
+
 Using the latest technology in the Scala ecosystem, Boilerplay is a pure Scala reactive web application built on Play 2.6, ScalaJS, Silhouette 5, Akka, and Sangria.
 It provides a good starting point for whatever you want to build.
-
-## Documentation
-
-https://kyleu.github.io/boilerplay
-
 
 ## Features
 
